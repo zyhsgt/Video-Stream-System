@@ -14,7 +14,12 @@ import os
 from pathlib import Path
 from typing import Optional
 
-import cv2
+try:
+    import cv2
+    CV2_AVAILABLE = True
+except ImportError:
+    CV2_AVAILABLE = False
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
@@ -248,6 +253,12 @@ async def capture_frame(request: CaptureFrameRequest) -> dict:
     Returns:
         包含成功状态和base64编码图像的字典
     """
+    if not CV2_AVAILABLE:
+        raise HTTPException(
+            status_code=503, 
+            detail="OpenCV未安装，无法使用帧捕获功能。请安装: pip install opencv-python"
+        )
+    
     rtsp_url = request.rtsp_url
     
     try:

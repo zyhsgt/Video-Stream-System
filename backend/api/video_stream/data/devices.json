@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cam001",
+    "name": "大门监控",
+    "group": "园区入口",
+    "rtsp_url": "rtsp://192.168.1.101:554/stream1",
+    "status": "online",
+    "description": "园区大门主摄像头"
+  },
+  {
+    "id": "cam002",
+    "name": "停车场A区",
+    "group": "停车场",
+    "rtsp_url": "rtsp://192.168.1.102:554/stream1",
+    "status": "online",
+    "description": "停车场A区监控"
+  },
+  {
+    "id": "cam003",
+    "name": "停车场B区",
+    "group": "停车场",
+    "rtsp_url": "rtsp://192.168.1.103:554/stream1",
+    "status": "offline",
+    "description": "停车场B区监控"
+  },
+  {
+    "id": "cam004",
+    "name": "1号楼大厅",
+    "group": "办公楼/1号楼",
+    "rtsp_url": "rtsp://192.168.1.104:554/stream1",
+    "status": "online",
+    "description": "1号楼大厅监控"
+  },
+  {
+    "id": "cam005",
+    "name": "2号楼大厅",
+    "group": "办公楼/2号楼",
+    "rtsp_url": "rtsp://192.168.1.105:554/stream1",
+    "status": "online",
+    "description": "2号楼大厅监控"
+  }
+]
