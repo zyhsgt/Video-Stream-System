@@ -5,13 +5,25 @@
 
 ## 功能模块
 
-### 视频流传输
-- 监控流选择与预览
-- 多设备监控预览
-- 视频导出
-- 历史视频存储/回放
+### 模块1：监控流选择与预览
+- 监控设备列表展示（列表/树形结构）
+- 设备流地址转换（RTSP → FLV/HLS/WebRTC）
+- 设备增删改查管理
+- 设备状态监控（在线/离线）
 
-### 视频上传/监控设备状态
+### 模块2：多设备监控预览
+- 多路视频流同时预览
+- 分屏布局配置（1x1, 2x2, 3x3, 4x4, 1+5, 1+7）
+- 预览会话管理
+- 大屏联动切换
+- RTSP模拟流测试
+- 流转发管理
+
+### 模块3：视频导出
+- 历史视频存储/回放
+- 视频导出功能
+
+### 模块4：视频上传/设备状态
 - 监控设备状态（Ping检测）
 - 本地视频上传
 - 设备分布地域图
@@ -110,15 +122,34 @@ POST http://127.0.0.1:8000/api/stream/capture
 
 ## API 接口文档
 
-### 视频流管理 `/api/stream`
+### 监控流选择与预览 `/api/stream`（模块1）
 
 | 方法 | 接口 | 功能 | 参数 |
 |-----|------|-----|------|
+| GET | `/devices` | 获取监控设备列表 | - |
+| GET | `/devices/tree` | 获取设备树形结构 | - |
+| GET | `/devices/{device_id}` | 获取单个设备详情 | `device_id` (path) |
+| GET | `/url/{device_id}` | 获取设备流地址 | `device_id` (path), `format?` (query: flv/hls/webrtc) |
+| POST | `/devices` | 添加监控设备 | `id`, `name`, `group`, `rtsp_url`, `description?` |
+| DELETE | `/devices/{device_id}` | 删除监控设备 | `device_id` (path) |
+| PUT | `/devices/{device_id}/status` | 更新设备状态 | `device_id` (path), `status` (online/offline) |
 | POST | `/start` | 启动推流 | `video_path`, `stream_name`, `host?`, `port?` |
 | POST | `/stop` | 停止推流 | `stream_name` |
 | GET | `/list` | 获取活跃流列表 | - |
 | POST | `/capture` | 捕获视频帧 | `rtsp_url` |
-| GET | `/test` | 测试API | - |
+
+### 多设备监控预览 `/api/multi-preview`（模块2）
+
+| 方法 | 接口 | 功能 | 参数 |
+|-----|------|-----|------|
+| GET | `/layouts` | 获取分屏布局模板 | - |
+| POST | `/batch-streams` | 批量获取多路流地址 | `layout_type`, `device_ids` |
+| POST | `/session` | 创建预览会话 | `layout_type`, `device_ids` |
+| GET | `/session/{session_id}` | 获取预览会话 | `session_id` (path) |
+| PUT | `/session/{session_id}/main` | 切换主屏设备 | `session_id` (path), `device_id` |
+| DELETE | `/session/{session_id}` | 删除预览会话 | `session_id` (path) |
+| GET | `/rtsp/simulate` | 获取模拟RTSP流 | - |
+| POST | `/rtsp/forward` | 启动RTSP流转发 | `device_ids` |
 
 ### 设备监控 `/api/device`
 
@@ -141,7 +172,11 @@ Video-Stream-System/
 ├── backend/                    # 后端代码
 │   ├── api/                   # API 接口
 │   │   ├── video_stream/      # 视频流相关接口
-│   │   │   └── rtsp_manager.py  # RTSP推流管理
+│   │   │   ├── rtsp_manager.py   # RTSP推流管理
+│   │   │   ├── monitor_stream.py # 监控流选择与预览（模块1）
+│   │   │   ├── multi_preview.py  # 多设备监控预览（模块2）
+│   │   │   └── data/             # 设备数据持久化
+│   │   │       └── devices.json  # 监控设备配置
 │   │   ├── device_management/ # 设备管理接口
 │   │   │   ├── device_monitor.py  # 设备状态监控
 │   │   │   └── hello_world.py     # 示例接口
@@ -168,6 +203,7 @@ Video-Stream-System/
 - **视频处理**: FFMPEG + OpenCV
 - **RTSP服务**: MediaMTX
 - **数据持久化**: JSON文件
+- **流媒体格式**: FLV / HLS / WebRTC
 
 ---
 
