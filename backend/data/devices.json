@@ -1,0 +1,12 @@
+{
+  "devices": [
+    {
+      "id": 1,
+      "ip": "127.0.0.1",
+      "name": "本地测试设备",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/camera1",
+      "description": "本地测试用摄像头模拟器"
+    }
+  ],
+  "next_id": 2
+}

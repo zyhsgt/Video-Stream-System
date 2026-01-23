@@ -75,3 +75,5 @@ yarn-error.log*
 dist/
 build/
 
+# my code
+video_monitor/

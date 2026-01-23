@@ -1,0 +1,11 @@
+{
+  "streams": [
+    {
+      "name": "camera1",
+      "video_path": "c:/Users/Hongwei/Desktop/Project/Video-Stream-System/video_monitor/test_video/Fighting_2.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/camera1",
+      "host": "127.0.0.1",
+      "port": 8554
+    }
+  ]
+}
