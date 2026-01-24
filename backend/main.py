@@ -11,12 +11,15 @@ FastAPI 应用入口。
 
 from fastapi import FastAPI
 
+# 设备管理模块
 from backend.api.device_management.hello_world import router as hello_world_router
-from backend.api.device_management.device_ping import (
-    get_ping_manager,
-    router as device_ping_router,
-)
-from backend.api.device_management.camera_operation import router as camera_operation_router
+from backend.api.device_management.device_state import router as device_state_router
+from backend.api.device_management.device_monitor import router as device_monitor_router
+
+# 视频流模块
+from backend.api.video_stream.monitor_stream import router as monitor_stream_router
+from backend.api.video_stream.multi_preview import router as multi_preview_router
+from backend.api.video_stream.rtsp_manager import router as rtsp_manager_router
 
 
 def create_app() -> FastAPI:
@@ -26,19 +29,15 @@ def create_app() -> FastAPI:
         version="1.0.0",
     )
 
-    # 注册路由
+    # 注册路由 - 设备管理
     app.include_router(hello_world_router)
-    app.include_router(device_ping_router)
-    app.include_router(camera_operation_router)
+    app.include_router(device_state_router)
+    app.include_router(device_monitor_router)
 
-    # @app.on_event("startup")
-    # async def _startup() -> None:
-    #     # 启动后台定时检测（仅单进程内存版；生产多进程需改造）
-    #     await get_ping_manager().start()
-    #
-    # @app.on_event("shutdown")
-    # async def _shutdown() -> None:
-    #     await get_ping_manager().stop()
+    # 注册路由 - 视频流
+    app.include_router(monitor_stream_router)
+    app.include_router(multi_preview_router)
+    app.include_router(rtsp_manager_router)
 
     return app
 
@@ -50,5 +49,4 @@ app = create_app()
 async def root() -> dict:
     """简单根路径，用于健康检查。"""
     return {"message": "Video Stream System Backend is running"}
-
 
