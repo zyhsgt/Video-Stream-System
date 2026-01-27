@@ -317,7 +317,8 @@ async def start_camera_stream(camera_id: str) -> Dict[str, Any]:
 
         # 更新 camera 实例的 protocol_in
         camera.set_protocol_in(rtsp_url)
-
+        
+        await asyncio.sleep(0.1)
         return {
             "success": True,
             "message": "启动推流成功",
