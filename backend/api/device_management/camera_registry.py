@@ -97,7 +97,7 @@ class CameraRegistry:
             camera_ip=data.camera_ip,
             camera_name=data.camera_name,
             camera_region=data.camera_region,
-            camera_location=data.camera_location,
+            camera_location=location,
             video_path=data.video_path,
             accessible=data.accessible,
             protocol_in=data.protocol_in,
@@ -359,7 +359,7 @@ class CameraRegistry:
         with self._db_path.open("rb") as f:
             cameras: List[Camera] = pickle.load(f)
 
-        random_selected = random.sample(range(len(cameras) + 1), 30)
+        random_selected = random.sample(range(len(cameras) + 1), min(30, len(cameras)))
         print(random_selected)
 
         # 清空现有数据并加载

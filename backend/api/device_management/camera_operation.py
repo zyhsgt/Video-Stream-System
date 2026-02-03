@@ -154,15 +154,21 @@ async def simulate_cameras_from_video(data: CameraData) -> Dict[str, Any]: # (�
         raise HTTPException(status_code=500, detail=f"模拟摄像头失败: {str(e)}")
 
 def random_name():
-    region = random.choice(["教一", "教二", "教三", "教四"])
-    if region == "教三":
-        floor = random.randint(1, 10)
-    floor = random.randint(1, 5)  # 1~10 层
-    direction = random.choice(["东", "南", "西", "北"])
+    capitals = [
+        "石家庄", "太原", "沈阳", "长春", "哈尔滨",
+        "南京", "杭州", "合肥", "福州", "南昌",
+        "济南", "郑州", "武汉", "长沙", "广州",
+        "海口", "成都", "贵阳", "昆明", "西安",
+        "兰州", "西宁", "呼和浩特", "南宁", "拉萨",
+        "银川", "乌鲁木齐", "台北", "香港", "澳门",
+        "北京", "天津", "上海", "重庆"
+    ]
+    region = random.choice(capitals)
+    direction = random.choice(["东部", "南部", "西部", "北部"])
     location = (random.randint(110, 130), random.randint(25, 35))
     return {
         "region": region,
-        "name": f"{region}-{floor}层-{direction}",
+        "name": f"{region}-{direction}",
         "location": location
     }
 
@@ -180,7 +186,7 @@ async def save_all_test_videos(video_root:str):
         cam_data = CameraData(
             camera_id = camera_id,
             camera_ip = "10.112.65.161",
-            camera_name = camera_info['name'],
+            camera_name = f"{camera_info['name']}_{camera_id}",
             camera_region = camera_info['region'],
             camera_location = [camera_info['location']],
             video_path = video_path
@@ -377,6 +383,33 @@ async def get_camera_protocol_out(camera_id: str) -> Dict[str, Any]:
                 "camera_id": camera.get_camera_id(),
                 "camera_name": camera.get_camera_name(),
                 "protocol_out": camera.get_protocol_out(),
+            },
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"获取 protocol_out 失败: {str(e)}")
+
+@router.get("/cameras/protocol_in/{camera_id}") # 可能并不太需要,所有信息都可以从get_camera_status获取
+async def get_camera_protocol_in(camera_id: str) -> Dict[str, Any]:
+    """
+    通过 camera_id 查询 Camera 的 protocol_out。
+
+    返回字段：camera_id、camera_name、protocol_out
+    """
+    try:
+        camera = _registry.get_camera(camera_id=camera_id)
+        if camera is None:
+            return {
+                "success": False,
+                "camera": f"没有找到摄像头：{camera_id}",
+            }
+
+        print(f"Camera RTSP URL: {camera.get_protocol_in()}")
+        return {
+            "success": True,
+            "camera": {
+                "camera_id": camera.get_camera_id(),
+                "camera_name": camera.get_camera_name(),
+                "protocol_out": camera.get_protocol_in(),
             },
         }
     except Exception as e:
@@ -767,8 +800,8 @@ if __name__ == "__main__":
     async def _self_test() -> None:
         global _registry
 
-        # # 使用临时数据库路径，避免污染真实 DataBase/cameras_db.pkl
-        # tmp_db = os.getenv("CAMERA_SELFTEST_DB", "../../DataBase/cameras_db_test.pkl")
+        # 使用临时数据库路径，避免污染真实 DataBase/cameras_db.pkl
+        tmp_db = os.getenv("CAMERA_SELFTEST_DB", "/mnt21t/home/zyh/Projects/Video-Stream-System/backend/DataBase/cameras_db_all_ucf_crime_test.pkl")
         #
         # camera_names = []
         # camera_ids = []
@@ -792,9 +825,9 @@ if __name__ == "__main__":
         #
         # await simulate_cameras_from_video(cam_data)
         # _registry.save_to_db()
-        await load_cameras_from_db()
-        await save_all_test_videos(video_root="/mnt21t/home/zyh/Dataset/UCF-Crime/videos/test")
-        sys.exit()
+        # await load_cameras_from_db()
+        # await save_all_test_videos(video_root="/mnt21t/home/zyh/Dataset/UCF-Crime/videos/test")
+        # sys.exit()
 
         _registry = CameraRegistry.get_instance(tmp_db)
 
