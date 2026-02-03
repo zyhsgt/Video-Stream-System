@@ -7,8 +7,10 @@ CameraRegistry 负责在内存中管理所有 Camera 实例，提供增删改查
 from __future__ import annotations
 
 import asyncio
+import os.path
 import pickle
 import time
+import random
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -85,11 +87,16 @@ class CameraRegistry:
         if isinstance(data, dict):
             # 转换为 CameraData
             data = CameraData(**data)
-        
+
+        if isinstance(data.camera_location, list) and len(data.camera_location) == 1:
+            location = data.camera_location[0]
+        else:
+            location = data.camera_location
         camera = Camera(
             camera_id=data.camera_id,
             camera_ip=data.camera_ip,
             camera_name=data.camera_name,
+            camera_region=data.camera_region,
             camera_location=data.camera_location,
             video_path=data.video_path,
             accessible=data.accessible,
@@ -252,6 +259,7 @@ class CameraRegistry:
             return
 
         self._healthcheck_task = asyncio.create_task(self._healthcheck_loop())
+        print(f"HealthCheck Task is Created")
 
     async def stop_periodic_healthcheck(self) -> None:
         """停止后台定期健康检查任务。"""
@@ -268,7 +276,9 @@ class CameraRegistry:
 
     def is_periodic_healthcheck_running(self) -> bool:
         """返回定期健康检查任务是否在运行。"""
-        return self._healthcheck_task is not None and not self._healthcheck_task.done()
+        is_running = self._healthcheck_task is not None and not self._healthcheck_task.done()
+        print(f"Health Check is running:{is_running}. Is None: {self._healthcheck_task is None}. Is Done:{self._healthcheck_task.done()}")
+        return is_running
 
     async def run_healthcheck_once(
         self,
@@ -345,15 +355,21 @@ class CameraRegistry:
             return 0
         
         # try:
+        print(f"Path:{self._db_path} is exist:{os.path.exists(self._db_path)}")
         with self._db_path.open("rb") as f:
             cameras: List[Camera] = pickle.load(f)
 
+        random_selected = random.sample(range(len(cameras) + 1), 30)
+        print(random_selected)
+
         # 清空现有数据并加载
         self._cameras.clear()
-        for cam in cameras:
+        for idx, cam in enumerate(cameras):
+            if idx not in random_selected:
+                continue
             self._cameras[cam.get_camera_id()] = cam
 
-        return len(cameras)
+        return len(self._cameras) # len(cameras)
         # except Exception:
         #     return 0
 

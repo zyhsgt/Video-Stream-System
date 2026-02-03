@@ -16,6 +16,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from backend.api.Camera import CameraData
+from backend.api.Buffer import device_ip
 
 # from backend.api.device_management.camera_operation import _registry
 
@@ -153,9 +154,9 @@ def save_devices(devices: list[dict[str, Any]]) -> None:
 
 # ==================== 流地址转换逻辑 ====================
 
-STREAM_SERVER_HOST = "localhost"
+STREAM_SERVER_HOST = device_ip
 STREAM_SERVER_HTTP_PORT = 8080
-STREAM_SERVER_WEBRTC_PORT = 8555
+STREAM_SERVER_WEBRTC_PORT = 8889
 
 
 def convert_rtsp_to_flv(camera_id: str, rtsp_url: str) -> str:
@@ -166,8 +167,8 @@ def convert_rtsp_to_hls(camera_id: str, rtsp_url: str) -> str:
     return f"http://{STREAM_SERVER_HOST}:{STREAM_SERVER_HTTP_PORT}/live/{camera_id}/hls.m3u8"
 
 
-def convert_rtsp_to_webrtc(camera_id: str, rtsp_url: str) -> str:
-    return f"webrtc://{STREAM_SERVER_HOST}:{STREAM_SERVER_WEBRTC_PORT}/live/{camera_id}"
+def convert_rtsp_to_webrtc(camera_ip:str, camera_id: str, rtsp_url: str) -> str:
+    return f"http://{camera_ip}:{STREAM_SERVER_WEBRTC_PORT}/live/{camera_id}/whep"
 
 
 def get_all_stream_urls(camera_id: str, rtsp_url: str) -> dict[str, str]:

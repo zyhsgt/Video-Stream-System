@@ -5,9 +5,13 @@
 """
 
 from __future__ import annotations
-
+import sys
+module_path = "../../../"
+sys.path.append(module_path)
+from tqdm import tqdm
 import pickle
 import random
+import sys
 from typing import Any, Dict, List
 
 from fastapi import APIRouter, HTTPException
@@ -17,9 +21,44 @@ from backend.api.device_management.camera_registry import CameraRegistry
 from backend.api.video_stream.rtsp_manager import StartStreamRequest, StopStreamRequest, start_stream, stop_stream
 from backend.api.video_stream.camera_stream import convert_rtsp_to_hls, convert_rtsp_to_flv, convert_rtsp_to_webrtc
 
-from backend.api.Buffer import _registry, _active_processes
+from backend.api.Buffer import _registry, _active_processes, device_ip
 
 router = APIRouter(prefix="/api/device", tags=["camera_operation"])
+
+
+async def _start_all_cameras_streams() -> Dict[str, Any]:
+    """启动内存中所有摄像头的推流（内部函数，不暴露给前端）。"""
+    cameras = _registry.get_all_cameras()
+
+    results: List[Dict[str, Any]] = []
+    success_count = 0
+    failed_count = 0
+
+    for cam in cameras:
+        camera_id = cam.get_camera_id()
+        try:
+            resp = await start_camera_stream(camera_id)
+            results.append({
+                "camera_id": camera_id,
+                "success": True,
+                "resp": resp,
+            })
+            success_count += 1
+        except Exception as e:
+            results.append({
+                "camera_id": camera_id,
+                "success": False,
+                "error": str(e),
+            })
+            failed_count += 1
+
+    return {
+        "total": len(cameras),
+        "success_count": success_count,
+        "failed_count": failed_count,
+        "results": results,
+    }
+
 
 #@router.post("/cameras/simulate_camera_from_video")
 async def simulate_cameras_from_video(data: CameraData) -> Dict[str, Any]: # (实例化摄像头类)根据本地视频模拟摄像头
@@ -74,7 +113,7 @@ async def simulate_cameras_from_video(data: CameraData) -> Dict[str, Any]: # (�
             # 4) 获取前端使用的视频流url WebRTC/FLV/HLS
             if data.protocol_out == None or data.protocol_out.strip():
                 rtsp_stream_name = rtsp_url.split("/")[-1] # or f"{data.camera_name}_{data.camera_id}"
-                webrtc_url = convert_rtsp_to_webrtc(rtsp_stream_name, None) # 目前先暂定使用WebRTC
+                webrtc_url = convert_rtsp_to_webrtc(camera_ip, rtsp_stream_name, None) # 目前先暂定使用WebRTC
 
             # 4) 使用 rtsp_url 作为 protocol_in 实例化 Camera，并注册
             cam = Camera(
@@ -114,21 +153,63 @@ async def simulate_cameras_from_video(data: CameraData) -> Dict[str, Any]: # (�
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"模拟摄像头失败: {str(e)}")
 
+def random_name():
+    region = random.choice(["教一", "教二", "教三", "教四"])
+    if region == "教三":
+        floor = random.randint(1, 10)
+    floor = random.randint(1, 5)  # 1~10 层
+    direction = random.choice(["东", "南", "西", "北"])
+    location = (random.randint(110, 130), random.randint(25, 35))
+    return {
+        "region": region,
+        "name": f"{region}-{floor}层-{direction}",
+        "location": location
+    }
+
+async def save_all_test_videos(video_root:str):
+    videos = os.listdir(video_root)
+    videos_path = [os.path.join(video_root, video) for video in videos]
+
+    camera_ids = []
+    for video_path in tqdm(videos_path, desc=f"Add all video to DB"):
+        camera_info = random_name()
+        camera_id = str(random.randint(99999, 1000000))
+        while camera_id in camera_ids:
+            camera_id = str(random.randint(99999, 1000000))
+        print(f"CameraID:{camera_id}")
+        cam_data = CameraData(
+            camera_id = camera_id,
+            camera_ip = "10.112.65.161",
+            camera_name = camera_info['name'],
+            camera_region = camera_info['region'],
+            camera_location = [camera_info['location']],
+            video_path = video_path
+        )
+        camera_ids.append(camera_id)
+
+        await add_camera(cam_data)
 
 #@router.post("/cameras/load_from_db") # ATTN: 不暴露给前端
 async def load_cameras_from_db() -> Dict[str, Any]:
     """
     从数据库中读取所有 Camera 实例到内存。
-    
+
+    注意：加载完成后会尝试为所有摄像头启动推流（不暴露给前端的内部行为）。
+
     Returns:
-        包含加载数量和状态的字典
+        包含加载数量与推流启动结果的字典
     """
     try:
         count = _registry.load_from_db()
+        print(f"Camera_Count:{count}")
+
+        start_result = await _start_all_cameras_streams()
+
         return {
             "success": True,
             "message": f"成功从数据库加载 {count} 个摄像头",
             "loaded_count": count,
+            # "stream_start": start_result,
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"加载失败: {str(e)}")
@@ -178,6 +259,7 @@ async def add_camera(data: CameraData | Dict[str, Any]) -> Dict[str, Any]:
             "camera_id",
             "camera_ip",
             "camera_name",
+            "camera_region",
             "camera_location",
             "video_path", # 目前从本地视频模拟摄像头需要指定一个视频路径
             "accessible",
@@ -214,10 +296,11 @@ async def add_camera(data: CameraData | Dict[str, Any]) -> Dict[str, Any]:
 
             payload['protocol_in'] = rtsp_url
 
+        camera_ip = payload['camera_ip']
         if payload['protocol_out'] == None:
             if rtsp_url != None:
-                rtsp_stream_name = f"{payload['camera_name']}_{payload['camera_id']}"
-                webrtc_url = convert_rtsp_to_webrtc(rtsp_stream_name, None)  # 目前先暂定使用WebRTC
+                rtsp_stream_name = f"{payload['camera_id']}" # f"{payload['camera_name']}_{payload['camera_id']}"
+                webrtc_url = convert_rtsp_to_webrtc(camera_ip, rtsp_stream_name, None)  # 目前先暂定使用WebRTC
                 payload['protocol_out'] = webrtc_url
 
         # 创建并添加摄像头
@@ -287,6 +370,7 @@ async def get_camera_protocol_out(camera_id: str) -> Dict[str, Any]:
                 "camera": f"没有找到摄像头：{camera_id}",
             }
 
+        print(f"Camera WebRTC URL: {camera.get_protocol_out()}")
         return {
             "success": True,
             "camera": {
@@ -314,6 +398,7 @@ async def start_camera_stream(camera_id: str) -> Dict[str, Any]:
             video_path=camera.get_video_path(),
             host=camera.get_camera_ip(),
         )
+        print(f"Protocol_out:{camera.get_protocol_out()}")
         stream_resp = await start_stream(req)
         rtsp_url = stream_resp.get("rtsp_url")
         if not rtsp_url:
@@ -345,7 +430,7 @@ async def stop_camera_stream(camera_id: str) -> Dict[str, Any]:
         if camera is None:
             raise HTTPException(status_code=404, detail=f"没有找到摄像头：{camera_id}")
 
-        stream_name = f"{camera.get_camera_name()}_{camera.get_camera_id()}"
+        stream_name = f"{camera.get_camera_id()}" # f"{camera.get_camera_name()}_{camera.get_camera_id()}"
         resp = await stop_stream(StopStreamRequest(stream_name=stream_name))
 
         return {
@@ -395,6 +480,7 @@ async def get_camera_status(camera_id:str) -> Dict[str, Any]:
             "is_online": is_online,
             "camera_ip": camera.get_camera_ip(),
             "camera_location": camera.get_camera_location(),
+            "camera_region": camera.get_camera_region(),
             "video_path": camera.get_video_path(),
             "protocol_in": camera.get_protocol_in(),
             "protocol_out": camera.get_protocol_out(),
@@ -453,6 +539,7 @@ async def get_all_cameras_status() -> Dict[str, Any]:
                 "is_online": is_online,
                 "camera_ip": camera.get_camera_ip(),
                 "camera_location": camera.get_camera_location(),
+                "camera_region": camera.get_camera_region(),
                 "video_path": camera.get_video_path(),
                 "protocol_in": camera.get_protocol_in(),
                 "protocol_out": camera.get_protocol_out(),
@@ -546,7 +633,7 @@ async def stop_cameras_healthcheck() -> Dict[str, Any]:
         raise HTTPException(status_code=500, detail=f"停止健康检查失败: {str(e)}")
 
 
-# @router.get("/cameras/healthcheck/status")
+@router.get("/cameras/healthcheck/status")
 async def get_cameras_healthcheck_status() -> Dict[str, Any]:
     """查询后台定期健康检查是否在运行。"""
     try:
@@ -619,8 +706,9 @@ async def set_camera_data(data: CameraData) -> Dict[str, Any]:
 
             new_protocol_in = start_response["camera"]["rtsp_url"]
             camera.set_protocol_in(new_protocol_in)
+            camera_ip = data.camera_ip
             new_stream_id = f"{data.camera_name}_{data.camera_id}"
-            new_protocol_out = convert_rtsp_to_webrtc(new_stream_id, None)
+            new_protocol_out = convert_rtsp_to_webrtc(camera_ip, new_stream_id, None)
             camera.set_protocol_out(new_protocol_out)
 
         # 5. 保存到数据库
@@ -640,14 +728,6 @@ async def set_camera_data(data: CameraData) -> Dict[str, Any]:
         raise HTTPException(status_code=500, detail=f"更新视频路径失败: {str(e)}")
 
 if __name__ == "__main__":
-
-    # camera_path = "../../DataBase/cameras_db_test.pkl"
-    # with open(camera_path, 'rb') as f:
-    #     cameras_list = pickle.load(f)
-    #     f.close()
-    #
-    # print(len(cameras_list))
-
     import asyncio
     import os
 
@@ -666,17 +746,30 @@ if __name__ == "__main__":
 
     test_video_path = os.getenv(
         "CAMERA_SELFTEST_VIDEO_PATH",
-        "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+        "/mnt21t/home/zyh/Dataset/UCF-Crime/videos/test/Normal_Videos_924_x264.mp4",
     )
+
+    videos = [
+        "Normal_Videos_924_x264.mp4",
+        "Normal_Videos_935_x264.mp4",
+        "Normal_Videos_940_x264.mp4",
+        "Shooting032_x264.mp4",
+        "Explosion007_x264.mp4",
+        "Assault010_x264.mp4",
+        "Arrest039_x264.mp4",
+        "Burglary032_x264.mp4",
+        "Shoplifting044_x264.mp4",
+        "Normal_Videos_634_x264.mp4"
+    ]
 
     test_video_path_1 = "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4"
 
     async def _self_test() -> None:
         global _registry
 
-        # 使用临时数据库路径，避免污染真实 DataBase/cameras_db.pkl
-        tmp_db = os.getenv("CAMERA_SELFTEST_DB", "../../DataBase/cameras_db_test.pkl")
-
+        # # 使用临时数据库路径，避免污染真实 DataBase/cameras_db.pkl
+        # tmp_db = os.getenv("CAMERA_SELFTEST_DB", "../../DataBase/cameras_db_test.pkl")
+        #
         # camera_names = []
         # camera_ids = []
         # camera_ip = []
@@ -685,9 +778,9 @@ if __name__ == "__main__":
         # for i in range(0, 10):
         #     camera_names.append(f"Camera{i}")
         #     camera_ids.append(str(random.randint(99999, 1000000)))
-        #     camera_ip.append("127.0.0.1")
+        #     camera_ip.append(device_ip)
         #     camera_loc.append(locations[i])
-        #     video_path.append(test_video_path)
+        #     video_path.append(os.path.join("/mnt21t/home/zyh/Dataset/UCF-Crime/videos/test", videos[i]))
         #
         # cam_data = CameraData(
         #     camera_id = camera_ids,
@@ -699,10 +792,13 @@ if __name__ == "__main__":
         #
         # await simulate_cameras_from_video(cam_data)
         # _registry.save_to_db()
+        await load_cameras_from_db()
+        await save_all_test_videos(video_root="/mnt21t/home/zyh/Dataset/UCF-Crime/videos/test")
+        sys.exit()
 
         _registry = CameraRegistry.get_instance(tmp_db)
 
-        # camera_id = os.getenv("CAMERA_SELFTEST_CAMERA_ID", "test_cam_002")
+        camera_id = os.getenv("CAMERA_SELFTEST_CAMERA_ID", "test_cam_002")
 
         print("[1] load_cameras_from_db")
         r0 = await load_cameras_from_db()
@@ -747,16 +843,17 @@ if __name__ == "__main__":
         r7 = await run_cameras_healthcheck_once(timeout_s=1.0)
         print(r7)
 
-        selected_cameras_id = camera_id_list[4:9]
+        selected_cameras_id = camera_id_list[0:5]
 
         for camera_id in selected_cameras_id:
             print("[9] start_camera_stream")
-            r_start = await start_camera_stream(camera_id)
-            print(r_start)
+            # r_start = await start_camera_stream(camera_id)
+            # print(r_start)
 
             # ping_camera_result = await get_camera_status(camera_id)
             # print(ping_camera_result)
             # await asyncio.sleep(0.1)
+            r6 = await get_cameras_healthcheck_status()
             r7 = await run_cameras_healthcheck_once(timeout_s=1.0)
             print(r7)
 
@@ -765,6 +862,7 @@ if __name__ == "__main__":
             r_stop = await stop_camera_stream(camera_id)
             print(r_stop)
             # await asyncio.sleep(1)
+            r6 = await get_cameras_healthcheck_status()
             r7 = await run_cameras_healthcheck_once(timeout_s=1.0)
             print(r7)
 

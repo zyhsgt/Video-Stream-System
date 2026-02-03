@@ -97,8 +97,8 @@ async def _ping_rtsp(url: str, timeout_s: float) -> PingResult:
 async def _is_rtsp_stream_ready(stream_name: str):
     # MediaMTX 默认 API 端口是 9997
     api_url = f"http://127.0.0.1:9997/v3/paths/get/{stream_name}"
-    if stream_name.find("Camera4_748726") != -1:
-        print(stream_name)
+    # if stream_name.find("Camera4_748726") != -1:
+    #     print(stream_name)
     # async with httpx.AsyncClient() as client:
     try:
         resp = await client.get(api_url)

@@ -23,6 +23,7 @@ except ImportError:
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 import socket
+from backend.api.Buffer import device_ip
 
 
 router = APIRouter(prefix="/api/stream", tags=["video_stream"])
@@ -150,25 +151,28 @@ async def start_stream(request: StartStreamRequest) -> dict: # ATTN: 通过video
     stream_results: list[dict] = []
 
     for video_path, camera_id, camera_name, camera_host in zip(video_paths, camera_ids, camera_names, camera_hosts):
-        stream_name = f"{camera_name}_{camera_id}"
+        stream_name = f"{camera_id}"
         if stream_name in _active_processes:
             raise HTTPException(status_code=400, detail=f"流 {stream_name} 已在运行")
 
-        MEDIAMTX_OPEN = is_port_open()
+        MEDIAMTX_OPEN = await is_port_open()
         if not MEDIAMTX_OPEN:
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
                 detail="mediamtx没有打开, 并且请确保8554端口是和meidia.yml配置文件中的rtspAddress相匹配"
             )
         rtsp_url = f"rtsp://{camera_host}:{request.port}/live/{stream_name}"
+        print(rtsp_url)
+        print(video_path)
         ffmpeg_cmd = [
             "ffmpeg",
             "-re",
-            "-stream_loop", "-1",
+            # "-stream_loop", "-1",
             "-i", video_path,
             "-c", "copy",
             "-f", "rtsp",
-            rtsp_url
+            rtsp_url,
+            # "-rtsp_transport", "tcp",
         ]
 
         try:

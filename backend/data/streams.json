@@ -1,3 +1,669 @@
 {
-  "streams": []
+  "streams": [
+    {
+      "name": "ChangedCamera_769670",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/ChangedCamera_769670",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_751801",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_751801",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_181880",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_181880",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_642235",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_642235",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_324392",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_324392",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_126803",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_126803",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_937872",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_937872",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_858401",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_858401",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_982713",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_982713",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera4_856596",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera4_856596",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_292738",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_292738",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_150795",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_150795",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_438886",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_438886",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_939489",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_939489",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_925227",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_925227",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_862852",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_862852",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_129502",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_129502",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_796715",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_796715",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_110190",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_110190",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera4_400335",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera4_400335",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_572659",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_572659",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_746026",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_746026",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_333954",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_333954",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_281559",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_281559",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_430665",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_430665",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_938371",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_938371",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_752178",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_752178",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_747738",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_747738",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_673226",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_673226",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera4_951803",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera4_951803",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_242129",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_242129",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_524982",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_524982",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_479405",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_479405",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_646906",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_646906",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_478580",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_478580",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_589352",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_589352",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_257142",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_257142",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_655137",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_655137",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_787055",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_787055",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera4_275958",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera4_275958",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_285505",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_285505",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_733320",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_733320",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_444914",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_444914",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_268848",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_268848",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_286203",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_286203",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_832440",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_832440",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_877775",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_877775",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_753000",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_753000",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_111335",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_111335",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_615650",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_615650",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_741214",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_741214",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_753755",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_753755",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_367634",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_367634",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "ChangedCamera_687378",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/ChangedCamera_687378",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_465969",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_465969",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_768682",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_768682",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_666839",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_666839",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_490173",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_490173",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_350403",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_350403",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera4_980334",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera4_980334",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_526758",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_526758",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_545771",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_545771",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_277874",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_277874",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_591722",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_591722",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_902635",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_902635",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_996267",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_996267",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_431580",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_431580",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_983501",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_983501",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_442705",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_442705",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera4_634521",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera4_634521",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_593912",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_593912",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_518046",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_518046",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_883542",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_883542",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_212662",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_212662",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_148090",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_148090",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_549207",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_549207",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_347874",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_347874",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_917268",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_917268",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_618829",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_618829",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera4_277536",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera4_277536",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_105751",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_105751",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_848846",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_848846",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_140191",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_140191",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_523661",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_523661",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_124617",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_935_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_124617",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera0_945091",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera0_945091",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera1_121548",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera1_121548",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera2_684436",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera2_684436",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera3_863626",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera3_863626",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera4_623089",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera4_623089",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera5_841165",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera5_841165",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera6_482766",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera6_482766",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera7_483397",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera7_483397",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera8_704772",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera8_704772",
+      "host": "127.0.0.1",
+      "port": 8554
+    },
+    {
+      "name": "Camera9_338115",
+      "video_path": "F:\\UCF-Crime\\UCF-Crime-test\\Normal_Videos_924_x264.mp4",
+      "rtsp_url": "rtsp://127.0.0.1:8554/live/Camera9_338115",
+      "host": "127.0.0.1",
+      "port": 8554
+    }
+  ]
 }

@@ -20,7 +20,8 @@ class CameraData(BaseModel):
     camera_id: Union[str, List[str]]
     camera_ip: Union[str, List[str]]
     camera_name: Union[str, List[str]]
-    camera_location: Optional[Tuple[float, float]] = None
+    camera_region: Union[str, List[str]]
+    camera_location: Optional[List[Tuple[float, float]]] = None
     accessible: Optional[bool] = False
     protocol_in: Optional[str] = None
     protocol_out: Optional[str] = None
@@ -33,6 +34,7 @@ class Camera:
         camera_ip: str,
         camera_name: str,
         camera_location: Tuple[float, float],
+        camera_region: str,
         accessible: bool,
         protocol_in: str,
         protocol_out: str,
@@ -42,6 +44,7 @@ class Camera:
         self._camera_ip = camera_ip
         self._camera_name = camera_name
         self._camera_location = camera_location
+        self._camera_region = camera_region
         self._accessible = accessible
         self._protocol_in = protocol_in # video_stream: backend (e.g., rtsp_url)
         self._protocol_out = protocol_out # video_stream: frontend(e.g., WebRTC)
@@ -64,6 +67,9 @@ class Camera:
 
     def get_camera_location(self) -> Tuple[float, float]:
         return self._camera_location
+
+    def get_camera_region(self) -> str:
+        return self._camera_region
 
     def get_accessible(self) -> bool:
         return self._accessible
