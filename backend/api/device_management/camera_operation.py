@@ -388,32 +388,32 @@ async def get_camera_protocol_out(camera_id: str) -> Dict[str, Any]:
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"获取 protocol_out 失败: {str(e)}")
 
-@router.get("/cameras/protocol_in/{camera_id}") # 可能并不太需要,所有信息都可以从get_camera_status获取
-async def get_camera_protocol_in(camera_id: str) -> Dict[str, Any]:
-    """
-    通过 camera_id 查询 Camera 的 protocol_in。
-
-    返回字段：camera_id、camera_name、protocol_in
-    """
-    try:
-        camera = _registry.get_camera(camera_id=camera_id)
-        if camera is None:
-            return {
-                "success": False,
-                "camera": f"没有找到摄像头：{camera_id}",
-            }
-
-        print(f"Camera RTSP URL: {camera.get_protocol_in()}")
-        return {
-            "success": True,
-            "camera": {
-                "camera_id": camera.get_camera_id(),
-                "camera_name": camera.get_camera_name(),
-                "protocol_out": camera.get_protocol_in(),
-            },
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"获取 protocol_out 失败: {str(e)}")
+# @router.get("/cameras/protocol_in/{camera_id}") # 可能并不太需要,所有信息都可以从get_camera_status获取
+# async def get_camera_protocol_in(camera_id: str) -> Dict[str, Any]:
+#     """
+#     通过 camera_id 查询 Camera 的 protocol_in。
+#
+#     返回字段：camera_id、camera_name、protocol_in
+#     """
+#     try:
+#         camera = _registry.get_camera(camera_id=camera_id)
+#         if camera is None:
+#             return {
+#                 "success": False,
+#                 "camera": f"没有找到摄像头：{camera_id}",
+#             }
+#
+#         print(f"Camera RTSP URL: {camera.get_protocol_in()}")
+#         return {
+#             "success": True,
+#             "camera": {
+#                 "camera_id": camera.get_camera_id(),
+#                 "camera_name": camera.get_camera_name(),
+#                 "protocol_out": camera.get_protocol_in(),
+#             },
+#         }
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"获取 protocol_out 失败: {str(e)}")
 
 
 @router.post("/cameras/stream/start/{camera_id}")
