@@ -391,9 +391,9 @@ async def get_camera_protocol_out(camera_id: str) -> Dict[str, Any]:
 @router.get("/cameras/protocol_in/{camera_id}") # 可能并不太需要,所有信息都可以从get_camera_status获取
 async def get_camera_protocol_in(camera_id: str) -> Dict[str, Any]:
     """
-    通过 camera_id 查询 Camera 的 protocol_out。
+    通过 camera_id 查询 Camera 的 protocol_in。
 
-    返回字段：camera_id、camera_name、protocol_out
+    返回字段：camera_id、camera_name、protocol_in
     """
     try:
         camera = _registry.get_camera(camera_id=camera_id)
@@ -759,6 +759,15 @@ async def set_camera_data(data: CameraData) -> Dict[str, Any]:
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"更新视频路径失败: {str(e)}")
+
+def from_camera_id_get_rtsp_url(camera_id: str):
+    camera = _registry.get_camera(camera_id=camera_id)
+    if camera is None:
+        return None
+
+    # print(f"Camera WebRTC URL: {camera.get_protocol_out()}")
+    rtsp_url = camera.get_protocol_in()
+    return rtsp_url
 
 if __name__ == "__main__":
     import asyncio
